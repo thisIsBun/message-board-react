@@ -1,17 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDom from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from './components/App/App';
+import { ThemeProvider } from 'styled-components';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
+const theme = {
+  colors: {
+    red_300: "#F84527",
+    red_400: "#D53B21",
+    red_500: "#BE3B4C",
+  },
+};
+
+ReactDom.render(
+  <ThemeProvider theme={theme} >
     <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  </ThemeProvider>,
+  document.getElementById("root")
+); //執行的時候，把 App component render到 root位置
