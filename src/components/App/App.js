@@ -1,7 +1,11 @@
 import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types"
+
+const API_ENDPOINT = "https://student-json-api.lidemy.me/comments";
 
 const Page = styled.div`
-  width: 300px;
+  width: 360px;
   margin: 0 auto;
 `
 
@@ -30,12 +34,18 @@ const MessageContainer = styled.div`
   border: 1px solid black;
   padding: 8px 16px;
   border-radius: 8px;
+
+  &:not(first-child) {
+    margin-top: 8px;
+  }
 `
 
 const MessageHead = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3)
+  padding-bottom: 4px;
 `
 
 const MessageAuther = styled.div`
@@ -49,6 +59,11 @@ const MessageBody = styled.div`
   font-size: 16px;
 `
 
+const ErrorMessage = styled.p`
+  margin-top: 16px;
+  color: red;
+`;
+
 function Message({auther, time, children}) {
   return (
     <MessageContainer>
@@ -61,7 +76,29 @@ function Message({auther, time, children}) {
   )
 }
 
+Message.propTypes = {
+  auther: PropTypes.string,
+  time: PropTypes.string,
+  children: PropTypes.node
+}
+
 function App() {
+
+  const [messages, setMessages] = useState(null)
+  const [apiError, setApiError] = useState(null)
+
+  // App component render完後去 fetch api，因為只有畫面 render完後 fetch一次所以要放[]
+  useEffect(() => {
+    fetch(API_ENDPOINT)
+    .then((res) => res.json())
+    .then((data) => {
+      setMessages(data)
+    })
+    .catch(err => {
+      setApiError(err.message)
+    })
+  }, [])
+
   return (
     <Page>
       <Title>留言板</Title>
@@ -70,10 +107,21 @@ function App() {
         <SubmitButton>送出留言</SubmitButton>
       </MessageForm>
       <MessageList>
-        <Message auther="huli" time="2020-10-10 11:22:33">
-          1111
-        </Message>
+        {messages &&
+          messages.map((message) => {
+            return (
+              <Message
+                key={message.id}
+                auther={message.nickname}
+                time={new Date(message.createdAt).toLocaleString()}
+              >
+                {message.body}
+              </Message>
+            );
+          })}
       </MessageList>
+      {apiError && <ErrorMessage>Something went wrong. {apiError.toString()}</ErrorMessage>}
+      {messages && messages.length === 0 && <p>No Message.</p>} 
     </Page>
   );
 }
