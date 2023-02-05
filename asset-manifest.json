@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/message-board-react/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/message-board-react/static/js/main.52186c2d.chunk.js",
+    "main.js.map": "/message-board-react/static/js/main.52186c2d.chunk.js.map",
+    "runtime-main.js": "/message-board-react/static/js/runtime-main.2b8b151c.js",
+    "runtime-main.js.map": "/message-board-react/static/js/runtime-main.2b8b151c.js.map",
+    "static/js/2.68d9a7ac.chunk.js": "/message-board-react/static/js/2.68d9a7ac.chunk.js",
+    "static/js/2.68d9a7ac.chunk.js.map": "/message-board-react/static/js/2.68d9a7ac.chunk.js.map",
+    "index.html": "/message-board-react/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/message-board-react/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.68d9a7ac.chunk.js.LICENSE.txt": "/message-board-react/static/js/2.68d9a7ac.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2b8b151c.js",
+    "static/js/2.68d9a7ac.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.52186c2d.chunk.js"
+  ]
+}
